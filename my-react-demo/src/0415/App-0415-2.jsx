@@ -10,6 +10,10 @@ function App() {
     // 目前圖片的state(索引值)，預設為第一張圖(0)
     const [currentImg, setCurrentImg] = useState();
 
+    // 文字陣列
+    const arrString = ["Apple", "Banana", "Orange"];
+    const [activeIndex, setActiveIndex] = useState(0);
+
     return (
         <>
             <div className="main">
@@ -23,13 +27,12 @@ function App() {
                             return (
                                 <img key={index} src={img} alt="" width={100}
                                     // 當滑鼠碰到時，取得圖片的索引編號，透過setCurrentImg方法更改
-                                    onMouseOver={e => setCurrentImg(index)}
+                                    onMouseOver={() => setCurrentImg(index)}
                                     // 變更滑鼠形狀為手型icon
                                     style={{ cursor: "pointer" }} />
                             )
                         })
                     }
-
 
                 </div>
                 {/* 放大區 */}
@@ -39,7 +42,22 @@ function App() {
                     {/* 根據目前選到的索引值，動態顯示對應圖片 */}
                     <img src={arrImgs[currentImg]} alt="" width={800} />
                 </div>
-            </div>
+                <hr />
+
+                <ul>
+                    {arrString.map((text, i) => {
+                        return (
+                            <li
+                                key={i}
+                                onClick={() => setActiveIndex(i)}
+                                style={{color:i===activeIndex?'red':'black'}}
+                            >
+                                {text}
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div >
         </>
     )
 }
